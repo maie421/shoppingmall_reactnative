@@ -32,6 +32,7 @@ export default class RecipesListScreen extends React.Component {
         <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
       </View>
     </TouchableHighlight>
+    
   );
 
   render() {

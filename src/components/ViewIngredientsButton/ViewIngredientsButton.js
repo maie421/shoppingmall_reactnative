@@ -8,7 +8,8 @@ export default class ViewIngredientsButton extends React.Component {
     return (
       <TouchableHighlight underlayColor='rgba(73,182,77,1,0.9)' onPress={this.props.onPress}>
         <View style={styles.container}>
-          <Text style={styles.text}>View Ingredients</Text>
+          {/* <Image style={styles.infoPhoto} source={require('../../../assets/icons/time.png')} /> */}
+          <Text style={styles.text}>cart</Text>
         </View>
       </TouchableHighlight>
     );

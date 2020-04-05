@@ -1,126 +1,79 @@
-import React from 'react';
-import {
-  FlatList,
-  Text,
-  View,
-  Image,
-  TouchableHighlight
-} from 'react-native';
-import styles from './styles';
-import { ListItem, SearchBar } from 'react-native-elements';
-import MenuImage from '../../components/MenuImage/MenuImage';
-import {
-  getCategoryName,
-  getRecipesByRecipeName,
-  getRecipesByCategoryName,
-  getRecipesByIngredientName
-} from '../../data/MockDataAPI';
+import React, { Component } from 'react';
+import { Text, View, ScrollView, TextInput, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+var { width } = Dimensions.get("window")
+
+
+// import icons
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class SearchScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params = {} } = navigation.state;
-    return {
-      headerRight: (
-        <MenuImage
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        />
-      ),
-      headerTitle: (
-        <SearchBar
-          containerStyle={{
-            backgroundColor: 'transparent',
-            borderBottomColor: 'transparent',
-            borderTopColor: 'transparent',
-            flex: 1
-          }}
-          inputContainerStyle={{
-            backgroundColor: '#EDEDED'
-          }}
-          inputStyle={{
-            backgroundColor: '#EDEDED',
-            borderRadius: 10,
-            color: 'black'
-          }}
-          searchIcond
-          clearIcon
-          //lightTheme
-          round
-          onChangeText={text => params.handleSearch(text)}
-          //onClear={() => params.handleSearch('')}
-          placeholder="Search"
-          value={params.data}
-        />
-      )
-    };
-  };
-
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      data: []
+      dataCart:[],
     };
-  }
+ }
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    navigation.setParams({
-      handleSearch: this.handleSearch,
-      data: this.getValue
-    });
-  }
 
-  handleSearch = text => {
-    var recipeArray1 = getRecipesByRecipeName(text);
-    var recipeArray2 = getRecipesByCategoryName(text);
-    var recipeArray3 = getRecipesByIngredientName(text);
-    var aux = recipeArray1.concat(recipeArray2);
-    var recipeArray = [...new Set(aux)];
-    if (text == '') {
-      this.setState({
-        value: text,
-        data: []
-      });
-    } else {
-      this.setState({
-        value: text,
-        data: recipeArray
-      });
-    }
-  };
 
-  getValue = () => {
-    return this.state.value;
-  };
+ render() {
+   return (
+     <View style={{flex:1,alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{height:20}} />
+        {/* <Text style={{fontSize:32,fontWeight:"bold",color:"#33c37d"}}>Cart food</Text> */}
+        <View style={{height:10}} />
 
-  onPressRecipe = item => {
-    this.props.navigation.navigate('Recipe', { item });
-  };
+        <View style={{flex:1}}>
 
-  renderRecipes = ({ item }) => (
-    <TouchableHighlight underlayColor='rgba(73,182,77,1,0.9)' onPress={() => this.onPressRecipe(item)}>
-      <View style={styles.container}>
-        <Image style={styles.photo} source={{ uri: item.photo_url }} />
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
-      </View>
-    </TouchableHighlight>
-  );
+          <ScrollView>
 
-  render() {
-    return (
-      <View>
-        <FlatList
-          vertical
-          showsVerticalScrollIndicator={false}
-          numColumns={2}
-          data={this.state.data}
-          renderItem={this.renderRecipes}
-          keyExtractor={item => `${item.recipeId}`}
-        />
-      </View>
-    );
+                  <View style={{width:width-20,margin:10,backgroundColor:'transparent', flexDirection:'row', borderBottomWidth:2, borderColor:"#cccccc", paddingBottom:10}}>
+                    <Image resizeMode={"contain"} style={{width:width/3,height:width/3}} source={{uri: 'https://shoppi.s3.ap-northeast-2.amazonaws.com/images/1577166515%EC%86%8C%EA%B3%A0%EA%B8%B0.jpg'}} />
+                    <View style={{flex:1, backgroundColor:'trangraysparent', padding:10, justifyContent:"space-between"}}>
+                      <View>
+                        <Text style={{fontWeight:"bold", fontSize:20}}>이름</Text>
+                        <Text>Lorem Ipsum de food</Text>
+                      </View>
+                      <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <Text style={{fontWeight:'bold',color:"#33c37d",fontSize:20}}>3000</Text>
+                        <View style={{flexDirection:'row', alignItems:'center'}}>
+                          <TouchableOpacity onPress={()=>this.onChangeQuan(i,false)}>
+                            <Icon name="ios-remove-circle" size={35} color={"#33c37d"} />
+                          </TouchableOpacity>
+                          <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:18}}>1</Text>
+                          <TouchableOpacity onPress={()=>this.onChangeQuan(i,true)}>
+                            <Icon name="ios-add-circle" size={35} color={"#33c37d"} />
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+
+            <View style={{height:20}} />
+
+            <TouchableOpacity style={{
+                backgroundColor:"#33c37d",
+                width:width-40,
+                alignItems:'center',
+                padding:10,
+                borderRadius:5,
+                margin:20
+              }}>
+              <Text style={{
+                  fontSize:24,
+                  fontWeight:"bold",
+                  color:'white'
+                }}>
+                CHECKOUT
+              </Text>
+            </TouchableOpacity>
+
+            <View style={{height:20}} />
+          </ScrollView>
+
+        </View>
+
+     </View>
+   );
   }
 }

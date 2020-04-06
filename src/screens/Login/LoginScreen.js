@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
+import axios from 'axios';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -36,7 +36,7 @@ export default class LoginScreen extends React.Component {
             onChangeText={text => this.setState({password:text})}/>
         </View>
         <TouchableOpacity>
-          <Text style={styles.forgot}>Forgot Password?</Text>
+          <Text style={styles.forgot} >Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn}>
           <Text style={styles.loginText}>LOGIN</Text>

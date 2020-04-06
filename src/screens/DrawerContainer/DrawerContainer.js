@@ -3,6 +3,8 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import MenuButton from '../../components/MenuButton/MenuButton';
+import axios from 'axios';
+
 
 export default class DrawerContainer extends React.Component {
   render() {
@@ -27,7 +29,7 @@ export default class DrawerContainer extends React.Component {
             }}
           />
            <MenuButton
-            title="Login  "
+            title="Login"
             source={require('../../../assets/icons/Login.png')}
             onPress={() => {
               navigation.navigate('Login');

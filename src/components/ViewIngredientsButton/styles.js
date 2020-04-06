@@ -8,12 +8,14 @@ const styles = StyleSheet.create({
     marginTop: 70,
     marginLeft: 8,
     marginRight: 10,
-    // borderRadius: 100,
-    // borderColor: '#2cd18a',
-    // borderWidth: 1,
+    paddingBottom:20,
+    paddingTop:15,
+    borderRadius: 100,
+    borderColor: '#2cd18a',
+    borderWidth: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-    // backgroundColor: '#2cd18a'
+    alignItems: 'center',
+
   },
   text: {
     fontSize: 24,

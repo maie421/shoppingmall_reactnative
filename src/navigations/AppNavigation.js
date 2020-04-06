@@ -13,6 +13,7 @@ import DrawerContainer from '../screens/DrawerContainer/DrawerContainer';
 import IngredientScreen from '../screens/Ingredient/IngredientScreen';
 import SearchScreen from '../screens/Search/SearchScreen';
 import IngredientsDetailsScreen from '../screens/IngredientsDetails/IngredientsDetailsScreen';
+import LoginScreen from '../screens/Login/LoginScreen';
 
 /* const Stack = createStackNavigator();
 
@@ -44,10 +45,11 @@ const MainNavigator = createStackNavigator(
     Home: HomeScreen,
     Categories: CategoriesScreen,
     Recipe: RecipeScreen,
+    Login : LoginScreen,
     RecipesList: RecipesListScreen,
     Ingredient: IngredientScreen,
     Search: SearchScreen,
-    IngredientsDetails: IngredientsDetailsScreen
+    IngredientsDetails: IngredientsDetailsScreen,
   },
   {
     initialRouteName: 'Home',

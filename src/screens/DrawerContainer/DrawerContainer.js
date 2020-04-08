@@ -1,12 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View ,AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import MenuButton from '../../components/MenuButton/MenuButton';
-import axios from 'axios';
-
 
 export default class DrawerContainer extends React.Component {
+
   render() {
     const { navigation } = this.props;
     return (
@@ -28,6 +27,7 @@ export default class DrawerContainer extends React.Component {
               navigation.closeDrawer();
             }}
           />
+          
            <MenuButton
             title="Login"
             source={require('../../../assets/icons/Login.png')}

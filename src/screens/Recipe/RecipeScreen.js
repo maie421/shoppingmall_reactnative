@@ -14,6 +14,8 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { getIngredientName, getCategoryName, getCategoryById } from '../../data/MockDataAPI';
 import BackButton from '../../components/BackButton/BackButton';
 import ViewIngredientsButton from '../../components/ViewIngredientsButton/ViewIngredientsButton';
+import { uri } from '../../data/full';
+import axios from 'axios';
 
 const { width: viewportWidth } = Dimensions.get('window');
 
@@ -30,45 +32,45 @@ export default class RecipeScreen extends React.Component {
       )
     };
   };
-
+  state = {
+    food: []
+  }
+  componentDidMount() {
+  //   console.log(this.props.navigation.state.params.item);
+    const { item } = this.props.navigation.state.params;
+    // console.log(`item:${item.name}`);
+        // const item = navigation.getParam('item');
+    const uri_connect={uri};
+    axios.post(uri_connect.uri+`/api/comment`, {
+      id: item.id
+    })
+    .then(res => {
+        // console.log(res);
+        const food=res.data;
+        this.setState({food});
+        console.log(this.state.food);
+      })
+    }
   constructor(props) {
     super(props);
     this.state = {
       activeSlide: 0,
-      data:[
-        {id:1, name:"Frank Odalthh",    comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:2, name:"John DoeLink",     comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:3, name:"March SoulLaComa", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:4, name:"Finn DoRemiFaso",  comment:"Lorem ;ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:5, name:"Maria More More",  comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:6, name:"Clark June Boom!", comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-        {id:7, name:"The googler",      comment:"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor."},
-      ]
+
     };
   }
   renderComment = ({item}) =>(
     <View style={styles.container}>
       <TouchableOpacity onPress={() => {}}>
-        <Image style={styles.image} source={{uri: Notification.image}}/>
+        <Image style={styles.image} source={{uri: item.image}}/>
       </TouchableOpacity>
       <View style={styles.content}>
         <View style={styles.contentHeader}>
-          <Text  style={styles.name}>{Notification.name}</Text>
+          <Text  style={styles.name}>{item.title}</Text>
           <Text style={styles.time}>
-            9:58 am
+            {item.created_at}
           </Text>
         </View>
-        <Text rkType='primary3 mediumLine'>시켜먹으세요!</Text>
+        <Text rkType='primary3 mediumLine'>{item.body}</Text>
       </View>
     </View>
   );
@@ -88,10 +90,10 @@ export default class RecipeScreen extends React.Component {
 
   render() {
     const { activeSlide } = this.state;
-    const { navigation } = this.props;
-    const item = navigation.getParam('item');
-    const category = getCategoryById(item.categoryId);
-    const title = getCategoryName(category.id);
+    const { item } = this.props.navigation.state.params;
+    // const item = navigation.getParam('item');
+    // const category = getCategoryById(item.id);
+    // const title = getCategoryName(category.id);
     // const Notification = item.item;
     return (
       <View style={styles.container}>
@@ -128,19 +130,19 @@ export default class RecipeScreen extends React.Component {
             />
           </View> */}
          
-        <Image style={styles.image} source={{ uri: 'https://shoppi.s3.ap-northeast-2.amazonaws.com/images/1577166515%EC%86%8C%EA%B3%A0%EA%B8%B0.jpg' }} />
+        <Image style={styles.image} source={{ uri: item.path}} />
       </View>
         
 
         <View style={styles.infoRecipeContainer}>
-          <Text style={styles.infoRecipeName}>{item.title}</Text>
+          <Text style={styles.infoRecipeName}>{item.name}</Text>
           {/* <View style={styles.infoContainer}>
               <Text style={styles.category}>가격</Text>
           </View> */}
 
           <View style={styles.infoContainer}>
             {/* <Image style={styles.infoPhoto} source={require('../../../assets/icons/time.png')} /> */}
-            <Text style={styles.infoRecipe}>가격</Text>
+            <Text style={styles.infoRecipe}>{item.price}</Text>
           </View>
 
           <View style={styles.infoContainer}>
@@ -164,7 +166,7 @@ export default class RecipeScreen extends React.Component {
         </View>
         <FlatList
         style={styles.root}
-        data={this.state.data}
+        data={this.state.food}
         extraData={this.state}
         ItemSeparatorComponent={() => {
           return (
@@ -175,7 +177,7 @@ export default class RecipeScreen extends React.Component {
         //   return item.id;
         // }}
         renderItem={this.renderComment}
-        keyExtractor={item => `${item.recipeId}`}
+        keyExtractor={item => `${item.id}`}
             />
         </View>
     );

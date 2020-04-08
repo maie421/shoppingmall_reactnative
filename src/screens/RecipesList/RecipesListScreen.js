@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import styles from './styles';
 import { getRecipes, getCategoryName } from '../../data/MockDataAPI';
+import { uri } from '../../data/full';
+import axios from 'axios';
 
 export default class RecipesListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,7 +21,9 @@ export default class RecipesListScreen extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  state = {
+    food: []
+  }
   onPressRecipe = item => {
     this.props.navigation.navigate('Recipe', { item });
   };
@@ -27,27 +31,36 @@ export default class RecipesListScreen extends React.Component {
   renderRecipes = ({ item }) => (
     <TouchableHighlight underlayColor='rgba(73,182,77,1,0.9)' onPress={() => this.onPressRecipe(item)}>
       <View style={styles.container}>
-        <Image style={styles.photo} source={{ uri: item.photo_url }} />
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.category}>{getCategoryName(item.categoryId)}</Text>
+        <Image style={styles.photo} source={{ uri: item.path }} />
+        <Text style={styles.title}>{item.name}</Text>
+        <Text style={styles.category}>{item.price}</Text>
       </View>
     </TouchableHighlight>
     
   );
+  componentDidMount() {
+    const uri_connect={uri};
+    // JSON.stringify(uri_connect)
 
+    axios.get(uri_connect.uri+`/api/goods/meat`)
+      .then(res => {
+        const food = res.data;
+        this.setState({ food });
+      })
+  }
   render() {
     const { navigation } = this.props;
-    const item = navigation.getParam('category');
-    const recipesArray = getRecipes(item.id);
+    const item = navigation.getParam(this.state.food.data);
+    // const recipesArray = getRecipes(item.id);
     return (
       <View>
         <FlatList
           vertical
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={recipesArray}
+          data={this.state.food.data}
           renderItem={this.renderRecipes}
-          keyExtractor={item => `${item.recipeId}`}
+          keyExtractor={item => `${item.id}`}
         />
       </View>
     );

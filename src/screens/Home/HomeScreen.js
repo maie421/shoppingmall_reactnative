@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ScrollView, Text, View, TouchableHighlight, Image } from 'react-native';
+import { FlatList, ScrollView, Text, View, TouchableHighlight, Image,AsyncStorage } from 'react-native';
 import styles from './styles';
 import { recipes } from '../../data/dataArrays';
 import MenuImage from '../../components/MenuImage/MenuImage';
@@ -24,11 +24,10 @@ export default class HomeScreen extends React.Component {
     super(props);
   }
   state = {
-    persons: []
+    food: []
   }
   onPressRecipe = item => {
     this.props.navigation.navigate('Recipe', { item });
-    cnsole.log(item);
   };
 
   renderRecipes = ({ item }) => (
@@ -40,15 +39,26 @@ export default class HomeScreen extends React.Component {
       </View>
     </TouchableHighlight>
   );
-  componentDidMount() {
+  componentDidMount=async()=> {
+    // try {
+    //   const value = await AsyncStorage.getItem('user');
+    //   // if (value !== null) {
+    //     // We have data!!
+    //     var json = JSON.parse(value);
+    //     console.log( objectValues[json]+"실행");
+    //   // }
+    // } catch (error) {
+    //   // Error retrieving data
+    // }
     const uri_connect={uri};
     // JSON.stringify(uri_connect)
 
     axios.get(uri_connect.uri+`/api/goods/meat`)
       .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
+        const food = res.data;
+        this.setState({ food });
       })
+
   }
   render() {
     return (
@@ -57,7 +67,7 @@ export default class HomeScreen extends React.Component {
           vertical
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={this.state.persons.data}
+          data={this.state.food.data}
           renderItem={this.renderRecipes}
           keyExtractor={item => `${item.id}`}
         />

@@ -9,6 +9,7 @@ export default class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('title'),
+      
       headerTitleStyle: {
         fontSize: 16
       }
@@ -60,7 +61,7 @@ export default class LoginScreen extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>HeyAPP</Text>
+        <Text style={styles.logo}>food</Text>
         <View style={styles.inputView} >
           <TextInput  
             style={styles.inputText}
@@ -76,15 +77,12 @@ export default class LoginScreen extends React.Component {
             placeholderTextColor="#003f5c"
             onChangeText={text => this.setState({password:text})}/>
         </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot} >Forgot Password?</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.loginBtn} onPress={() => {this.Login()}}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={styles.loginText}>Signup</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   }

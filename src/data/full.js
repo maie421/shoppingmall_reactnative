@@ -1,7 +1,7 @@
 import React from 'react';
 import { View ,AsyncStorage} from 'react-native';
 
-export const uri =`http://510266bc.ngrok.io`;
+export const uri =`http://shoppingmaie.herokuapp.com`;
 
 export const LoginCheck=()=>{
     AsyncStorage.getItem("user", (err, value )=>{

@@ -22,6 +22,7 @@ const { width: viewportWidth } = Dimensions.get('window');
 export default class RecipeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
+      title: '고기',
       headerTransparent: 'true',
       headerLeft: (
         <BackButton
@@ -142,9 +143,9 @@ export default class RecipeScreen extends React.Component {
 
           <View style={styles.infoContainer}>
             {/* <Image style={styles.infoPhoto} source={require('../../../assets/icons/time.png')} /> */}
-            <Text style={styles.infoRecipe}>{item.price}</Text>
+            <Text style={styles.infoRecipe}>{item.price} 원</Text>
           </View>
-
+{/* 
           <View style={styles.infoContainer}>
             <ViewIngredientsButton
               onPress={() => {
@@ -153,7 +154,7 @@ export default class RecipeScreen extends React.Component {
                 navigation.navigate('Search', { ingredients, title });
               }}
             />
-          </View>
+          </View> */}
          
           {/* <View style={styles.infoContainer}>
             <Text style={styles.infoDescriptionRecipe}>{item.description}</Text>

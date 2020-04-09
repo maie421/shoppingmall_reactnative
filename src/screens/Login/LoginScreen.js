@@ -15,8 +15,8 @@ export default class LoginScreen extends React.Component {
     };
   };
   state={
-    email:"admin@naver.com",
-    password:"123456789",
+    email:"",
+    password:"",
     user:[]
   }
   Login = ()=>{
@@ -38,18 +38,22 @@ export default class LoginScreen extends React.Component {
         // console.log(res);
         const user=res.data;
         this.setState({user});
-        // AsyncStorage.setItem("user", user);
+        let data = JSON.stringify(this.state.user);
+        AsyncStorage.setItem("user", data, () => {
+        });
         // console.log(`login 버튼`);
-        // const value =  AsyncStorage.getItem('user');
-        // if (value !== null) {
-        //   // We have data!!
-        //   var json = JSON.parse(value);
-        //   console.log(json+"실행");
-        // }
+        // AsyncStorage.getItem("user", (err, value )=>{
+        //   if (err == null){
+        //   let json = JSON.parse(value);
+        //   console.log(json);
+        //   }
+        //   });
+        this.props.navigation.navigate('Home');
+        return Alert.alert(`로그인을 성공하였습니다.`);
       })
     .catch(error=> {
-      return Alert.alert(error);
-      // return Alert.alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      //return Alert.alert(error);
+      return Alert.alert("아이디 또는 비밀번호가 일치하지 않습니다.");
     }); 
   }
   }

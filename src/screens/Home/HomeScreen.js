@@ -5,7 +5,7 @@ import { recipes } from '../../data/dataArrays';
 import MenuImage from '../../components/MenuImage/MenuImage';
 import DrawerActions from 'react-navigation';
 import { getCategoryName } from '../../data/MockDataAPI';
-import { uri } from '../../data/full';
+import { uri,LoginCheck } from '../../data/full';
 import axios from 'axios';
 
 export default class HomeScreen extends React.Component {

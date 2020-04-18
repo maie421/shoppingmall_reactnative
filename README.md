@@ -1,28 +1,11 @@
-# Recipes App in React Native
-
-<center><a href="https://www.instamobile.io/app-templates/food-app-template/"><img src="https://www.instamobile.io/wp-content/uploads/2019/07/Screen-Shot-2019-07-22-at-8.56.44-PM.png" /></a></center>
-
-Download this beautiful free React Native starter kit, featuring a recipes app, to bootstrap your mobile app development. Learn React Native by working on a real project. Get familiar with various native components, navigation, redux and more.
-
-## Expo Demo
-<center><a href=""><img src="https://www.instamobile.io/wp-content/uploads/2019/07/Screen-Shot-2019-07-22-at-8.20.29-PM.png" /></a></center>
-
-## Features
-- Recipes List
-- Categories
-- Ingredients
-- Recipes Details Screen
-- Photo Gallery
-- Detailed Description
-- Ingredients button
-- Ingredients List
-- Recipes by Ingredient
-- Search
-- Drawer Menu
-- Navigation Bar
-- Beautiful UI Design Kit
-- Compatible with Expo
-- Highly modularized codebase
+# 2020 react native 푸드 앱 버전
+<h2>※프로젝트 완료</h2>
+<h3>공헌한 내용</h3>
+<ul>
+  <li>참여도: 개인프로젝트</li>
+  <li>라이브러리 : react </li>
+</ul>
+<br>
 
 
-Coded with 💖💖💖 by <a href="https://www.instamobile.io/">Instamobile</a> and <a href="https://www.instakotlin.com/">Instakotlin</a>.
+

@@ -3,7 +3,7 @@
 <h3>공헌한 내용</h3>
 <ul>
   <li>참여도: 개인프로젝트</li>
-  <li>라이브러리 : react </li>
+  <li>라이브러리 : react native</li>
 </ul>
 <br>
 <img src="https://user-images.githubusercontent.com/35258834/79636590-ba1fd980-81b3-11ea-8747-3e85114c6e20.jpg" width="30%" style="float: left;">
